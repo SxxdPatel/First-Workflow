@@ -1,0 +1,52 @@
+name: Node.js CI/CD
+
+on:
+  push:
+    branches:
+      - main
+      - 'release/*'
+  workflow_dispatch:
+
+jobs:
+  info:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Output GitHub context
+        run: echo "${{ github }}"
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout repository
+      uses: actions/checkout@v2
+
+    - name: Set up Node.js
+      uses: actions/setup-node@v3
+      with:
+        node-version: '14'
+    
+    - name: Install dependencies
+      run: npm install
+
+    - name: Run tests
+      run: npm test
+
+    - name: Build project
+      run: npm run build
+
+    - name: Deploy
+      if: github.ref == 'refs/heads/main'
+      run: |
+        echo "Deploying application..."
+        # Add your deployment script or commands here
+        # For example, if deploying to a server via SSH:
+        # scp -r ./build user@server:/path/to/deploy
+
+    - name: Upload build artifacts
+      if: always()
+      uses: actions/upload-artifact@v2
+      with:
+        name: build-artifacts
+        path: ./build
