@@ -21,7 +21,7 @@ jobs:
       - name: Cache dependencies
         uses: actions/cache@v3
         with:
-          path: ~/.npm
+          path: ~/.npm-packages-cache
           key: ${{ runner.os }}-node-${{ hashFiles('package-lock.json') }}
           restore-keys: |
             ${{ runner.os }}-node-
@@ -48,7 +48,7 @@ jobs:
       - name: Cache dependencies
         uses: actions/cache@v3
         with:
-          path: ~/.npm
+          path: ~/.npm-packages-cache
           key: ${{ runner.os }}-node-${{ hashFiles('package-lock.json') }}
           restore-keys: |
             ${{ runner.os }}-node-
