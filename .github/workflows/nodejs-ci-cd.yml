@@ -73,8 +73,8 @@ jobs:
     needs: build # This ensures deploy job runs after the build job
 
     steps:
-      # - name: Checkout repository
-      #   uses: actions/checkout@v4
+      - name: Checkout repository
+        uses: actions/checkout@v4
 
       - name: Download build artifacts
         uses: actions/download-artifact@v3
