@@ -82,6 +82,9 @@ jobs:
           name: build-artifacts
           path: ./dist
 
+      - name: Verify Build Output
+        run: ls -l ./dist
+
       - name: Deploy
         run: |
           echo "Deploying application..."
